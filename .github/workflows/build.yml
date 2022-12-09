@@ -5,12 +5,28 @@ name: Build
 jobs:
   build_and_test:
     name: Rust project
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest,  windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+          git submodule sync --recursive
+          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+
+      - name: Install Raylib deps
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev cmake llvm-dev libclang-dev clang -y
+
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+
       - uses: actions-rs/cargo@v1
         with:
           command: build
