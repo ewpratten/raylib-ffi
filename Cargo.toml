@@ -11,6 +11,12 @@ repository = "https://github.com/ewpratten/raylib-ffi"
 license = "GPL-3.0"
 keywords = ["raylib", "graphics"]
 categories = ["external-ffi-bindings", "graphics", "multimedia", "rendering"]
+exclude = [
+    "third_party/raylib/examples/*",
+    "third_party/raylib/parser/*",
+    "third_party/raylib/logo/*",
+    "third_party/raylib/projects/*"
+]
 
 [build-dependencies]
 bindgen = "^0.63.0"
