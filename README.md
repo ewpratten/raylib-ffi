@@ -7,10 +7,10 @@
 
 repo description
 
-## Installation
+## Dependencies
 
-This crate can be installed via `cargo` with:
+Fedora:
 
 ```sh
-cargo install <crate_name>
+dnf install clang-devel alsa-lib-devel mesa-libGL-devel libX11-devel libXrandr-devel libXi-devel libXcursor-devel libXinerama-devel libatomic
 ```

@@ -1,3 +1,4 @@
 [submodule "third_party/raylib"]
 	path = third_party/raylib
 	url = https://github.com/raysan5/raylib
+	ignore = dirty
