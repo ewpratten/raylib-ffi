@@ -1,13 +1,13 @@
 [package]
-name = "raylib-ffi"
+name = "renderkit"
 version = "4.2.0"
 authors = ["Evan Pratten <ewpratten@gmail.com>"]
 edition = "2021"
 description = "Automatic raw Rust bindings to raylib"
-documentation = "https://docs.rs/raylib-ffi"
+documentation = "https://docs.rs/renderkit"
 readme = "README.md"
-homepage = "https://github.com/ewpratten/raylib-ffi"
-repository = "https://github.com/ewpratten/raylib-ffi"
+homepage = "https://github.com/ewpratten/renderkit"
+repository = "https://github.com/ewpratten/renderkit"
 license = "GPL-3.0"
 keywords = ["raylib", "graphics"]
 categories = ["external-ffi-bindings", "graphics", "multimedia", "rendering"]
@@ -17,6 +17,10 @@ exclude = [
     "third_party/raylib/logo/*",
     "third_party/raylib/projects/*"
 ]
+
+[dependencies]
+rgb = "^0.8.34"
+
 
 [build-dependencies]
 bindgen = "^0.63.0"
