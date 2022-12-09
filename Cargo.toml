@@ -19,3 +19,4 @@ categories = []
 
 [build-dependencies]
 bindgen = "^0.63.0"
+cmake = "^0.1.49"
