@@ -20,7 +20,7 @@ exclude = [
 
 [dependencies]
 rgb = "^0.8.34"
-
+cgmath = "^0.18.0"
 
 [build-dependencies]
 bindgen = "^0.63.0"

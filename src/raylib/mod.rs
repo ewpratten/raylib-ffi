@@ -2,3 +2,4 @@
 
 pub mod xlat;
 pub mod ffi;
+pub mod palette;

@@ -2,3 +2,4 @@
 
 
 pub mod rgb;
+pub mod cgmath;
