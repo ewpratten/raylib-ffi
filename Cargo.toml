@@ -1,21 +1,16 @@
 [package]
 name = "raylib-ffi"
-version = "0.1.0"
+version = "4.2.0"
 authors = ["Evan Pratten <ewpratten@gmail.com>"]
 edition = "2021"
-description = "<description>"
+description = "Automatic raw Rust bindings to raylib"
 documentation = "https://docs.rs/raylib-ffi"
 readme = "README.md"
 homepage = "https://github.com/ewpratten/raylib-ffi"
 repository = "https://github.com/ewpratten/raylib-ffi"
 license = "GPL-3.0"
-keywords = []
-categories = []
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-
+keywords = ["raylib", "graphics"]
+categories = ["external-ffi-bindings", "graphics", "multimedia", "rendering"]
 
 [build-dependencies]
 bindgen = "^0.63.0"
