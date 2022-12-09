@@ -6,6 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: rustup component add clippy
+      - run: sudo apt-get update && sudo apt-get install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev cmake llvm-dev libclang-dev clang -y
       - uses: actions-rs/clippy-check@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
