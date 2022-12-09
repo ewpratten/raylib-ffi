@@ -1,0 +1,6 @@
+{
+    "c-cpp-flylint.clang.includePaths": [
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/third_party/raylib/src",
+    ],
+}
