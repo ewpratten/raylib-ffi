@@ -1,4 +1,17 @@
-use std::path::PathBuf;
+use std::{path::PathBuf, collections::HashSet};
+
+#[derive(Debug)]
+struct IgnoreMacros(HashSet<String>);
+
+impl bindgen::callbacks::ParseCallbacks for IgnoreMacros {
+    fn will_parse_macro(&self, name: &str) -> bindgen::callbacks::MacroParsingBehavior {
+        if self.0.contains(name) {
+            bindgen::callbacks::MacroParsingBehavior::Ignore
+        } else {
+            bindgen::callbacks::MacroParsingBehavior::Default
+        }
+    }
+}
 
 /// Compiles raylib
 fn compile_raylib(raylib_path: &str) {
@@ -23,9 +36,18 @@ fn compile_raylib(raylib_path: &str) {
     let destination = cmake_config.build();
 
     // Tell cargo where the libraries might be
-    println!("cargo:rustc-link-search=native={}", destination.join("lib").display());
-    println!("cargo:rustc-link-search=native={}", destination.join("lib32").display());
-    println!("cargo:rustc-link-search=native={}", destination.join("lib64").display());
+    println!(
+        "cargo:rustc-link-search=native={}",
+        destination.join("lib").display()
+    );
+    println!(
+        "cargo:rustc-link-search=native={}",
+        destination.join("lib32").display()
+    );
+    println!(
+        "cargo:rustc-link-search=native={}",
+        destination.join("lib64").display()
+    );
 }
 
 /// Links libraries
@@ -62,10 +84,25 @@ fn link_libs() {
 
 /// Generates `bindings.rs` file
 fn generate_bindings(header_file: &str) {
+    // Tell bindgen to ignore these macros
+    let ignored_macros = IgnoreMacros(
+        vec![
+            "FP_INFINITE".into(),
+            "FP_NAN".into(),
+            "FP_NORMAL".into(),
+            "FP_SUBNORMAL".into(),
+            "FP_ZERO".into(),
+            "IPPORT_RESERVED".into(),
+        ]
+        .into_iter()
+        .collect(),
+    );
+
     // Generate the data
     let bindings = bindgen::Builder::default()
         .header(header_file)
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+        .parse_callbacks(Box::new(ignored_macros))
         .generate()
         .expect("Unable to generate bindings");
 

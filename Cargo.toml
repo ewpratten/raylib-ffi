@@ -21,7 +21,17 @@ exclude = [
 [dependencies]
 rgb = "^0.8.34"
 cgmath = "^0.18.0"
+cstr = "^0.2.11"
+num-traits = "^0.2.14"
+printf = "^0.1.0"
+log = "^0.4.14"
+num-derive = "^0.3.3"
+vsprintf = "^2.0.0"
+lazy_static = "^1.4.0"
 
 [build-dependencies]
 bindgen = "^0.63.0"
 cmake = "^0.1.49"
+
+[dev-dependencies]
+env_logger = "^0.10.0"
