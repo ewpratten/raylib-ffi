@@ -1,6 +1,6 @@
 [package]
 name = "renderkit"
-version = "4.2.0"
+version = "1.0.0"
 authors = ["Evan Pratten <ewpratten@gmail.com>"]
 edition = "2021"
 description = "Automatic raw Rust bindings to raylib"

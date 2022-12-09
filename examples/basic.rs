@@ -8,7 +8,7 @@ pub fn main() {
         // Create a window
         let window = Window::new(
             cgmath::Vector2::new(800, 450),
-            "raylib-ffi example - basic window",
+            "renderkit example - basic window",
         );
 
         // Render the window
