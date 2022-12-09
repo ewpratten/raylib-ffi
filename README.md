@@ -1,4 +1,4 @@
-# Renderkit: Simple, powerful rendering system
+# Renderkit
 [![Crates.io](https://img.shields.io/crates/v/renderkit)](https://crates.io/crates/renderkit)
 [![Docs.rs](https://docs.rs/renderkit/badge.svg)](https://docs.rs/renderkit)
 [![Build Status](https://github.com/Ewpratten/renderkit/actions/workflows/build.yml/badge.svg)](https://github.com/Ewpratten/renderkit/actions/workflows/build.yml)
