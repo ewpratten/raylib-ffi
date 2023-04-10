@@ -3,7 +3,7 @@
 [![Docs.rs](https://docs.rs/raylib-ffi/badge.svg)](https://docs.rs/raylib-ffi)
 [![Build Status](https://github.com/Ewpratten/raylib-ffi/actions/workflows/build.yml/badge.svg)](https://github.com/Ewpratten/raylib-ffi/actions/workflows/build.yml)
 
-`raylib-ffi` aims to provide a "no frills" direct binding to [raylib](https://www.raylib.com/) for rust developers. Unlike the [`raylib-rs` project](https://github.com/deltaphc/raylib-rs), this library trades high-level abstractions for staying truly up to date with upstream raylib (instead of a whole major version behind).
+`raylib-ffi` aims to provide a "no frills" direct binding to [raylib](https://www.raylib.com/) for rust developers.
 
 ## Dependencies
 
