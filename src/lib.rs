@@ -11,7 +11,10 @@ pub mod enums {
     include!(concat!(env!("OUT_DIR"), "/enums.rs"));
 }
 
-pub mod colors;
+/// This module contains auto-generated Rust representations of raylib's colors.
+pub mod colors {
+    include!(concat!(env!("OUT_DIR"), "/colors.rs"));
+}
 
 #[cfg(feature = "macros")]
 #[macro_use]

@@ -1,4 +1,4 @@
-use std::{path::Path, error::Error};
+use std::error::Error;
 
 use serde_json::Value;
 

@@ -1,4 +1,4 @@
-use crate::wrap::{raylib_api::RayLibApiDefinition, enums::wrap_exposed_enums};
+use crate::wrap::{raylib_api::RayLibApiDefinition, enums::wrap_exposed_enums, colors::wrap_default_colors};
 
 mod bind;
 mod wrap;
@@ -20,5 +20,6 @@ pub fn main() {
     let api_defs = RayLibApiDefinition::load("third_party/raylib/parser/output/raylib_api.json").unwrap();
 
     // Generate safe wrappers
-    wrap_exposed_enums(api_defs);
+    wrap_exposed_enums(api_defs.clone());
+    wrap_default_colors(api_defs);
 }
