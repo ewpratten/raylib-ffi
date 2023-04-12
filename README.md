@@ -23,6 +23,6 @@ cargo run --example basic
 
 ## Versioning policy
 
-`raylib-ffi` follow [SemVer](https://semver.org/).
+`raylib-ffi` follows [SemVer](https://semver.org/).
 
 The major and minor version numbers of a `raylib-ffi` will always match the version of raylib it was built against. The patch version may be incremented if a rust-only fix is needed at any point.

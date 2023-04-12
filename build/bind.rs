@@ -1,5 +1,7 @@
 use std::path::PathBuf;
 
+use crate::wrap::enums::get_blocked_enum_names;
+
 /// Compiles raylib
 pub fn compile_raylib(raylib_path: &str) {
     // Construct a config for running cmake
@@ -23,9 +25,18 @@ pub fn compile_raylib(raylib_path: &str) {
     let destination = cmake_config.build();
 
     // Tell cargo where the libraries might be
-    println!("cargo:rustc-link-search=native={}", destination.join("lib").display());
-    println!("cargo:rustc-link-search=native={}", destination.join("lib32").display());
-    println!("cargo:rustc-link-search=native={}", destination.join("lib64").display());
+    println!(
+        "cargo:rustc-link-search=native={}",
+        destination.join("lib").display()
+    );
+    println!(
+        "cargo:rustc-link-search=native={}",
+        destination.join("lib32").display()
+    );
+    println!(
+        "cargo:rustc-link-search=native={}",
+        destination.join("lib64").display()
+    );
 }
 
 /// Links libraries
@@ -62,12 +73,25 @@ pub fn link_libs() {
 
 /// Generates `bindings.rs` file
 pub fn generate_bindings(header_file: &str) {
-    // Generate the data
-    let bindings = bindgen::Builder::default()
+    // Construct a builder for generating bindings
+    let mut builder = bindgen::Builder::default()
         .header(header_file)
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
-        .generate()
-        .expect("Unable to generate bindings");
+        .blocklist_item("DEG2RAD")
+        .blocklist_item("PI")
+        .blocklist_item("RAD2DEG")
+        .blocklist_item("__GNUC_VA_LIST")
+        .blocklist_item("__bool_true_false_are_defined")
+        .blocklist_item("false_")
+        .blocklist_item("true_");
+
+    // Deny all blocked enums
+    for enum_name in get_blocked_enum_names() {
+        builder = builder.blocklist_type(format!("{}.*", enum_name));
+    }
+
+    // Generate the bindings
+    let bindings = builder.generate().expect("Unable to generate bindings");
 
     // Write `src/bindings.rs`
     let out_path = PathBuf::from(std::env::var("OUT_DIR").unwrap());
