@@ -6,12 +6,13 @@
 // Include the generated bindings
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
-#[cfg(feature = "enums")]
-pub mod enums;
+/// This module contains auto-generated Rust representations of raylib's enums.
+pub mod enums {
+    include!(concat!(env!("OUT_DIR"), "/enums.rs"));
+}
+
+pub mod colors;
 
 #[cfg(feature = "macros")]
 #[macro_use]
 pub mod macros;
-
-#[cfg(feature = "colors")]
-pub mod colors;

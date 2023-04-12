@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
 /// Compiles raylib
-fn compile_raylib(raylib_path: &str) {
+pub fn compile_raylib(raylib_path: &str) {
     // Construct a config for running cmake
     let mut cmake_config = cmake::Config::new(raylib_path);
     let mut cmake_config = cmake_config
@@ -29,7 +29,7 @@ fn compile_raylib(raylib_path: &str) {
 }
 
 /// Links libraries
-fn link_libs() {
+pub fn link_libs() {
     // Handle windows libs
     if cfg!(windows) {
         println!("cargo:rustc-link-lib=dylib=winmm");
@@ -61,7 +61,7 @@ fn link_libs() {
 }
 
 /// Generates `bindings.rs` file
-fn generate_bindings(header_file: &str) {
+pub fn generate_bindings(header_file: &str) {
     // Generate the data
     let bindings = bindgen::Builder::default()
         .header(header_file)
@@ -74,18 +74,4 @@ fn generate_bindings(header_file: &str) {
     bindings
         .write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");
-}
-
-pub fn main() {
-    // Files to watch that should trigger a rebuild
-    println!("cargo:rerun-if-changed=src/wrapper.h");
-
-    // Compile raylib
-    compile_raylib("third_party/raylib");
-
-    // Link libraries
-    link_libs();
-
-    // Generate bindings
-    generate_bindings("src/wrapper.h");
 }
