@@ -4,41 +4,22 @@ pub fn main() {
         raylib_ffi::InitWindow(
             800,
             450,
-            "raylib-ffi example - basic window\0".as_ptr() as *const i8,
+            raylib_ffi::rl_str!("raylib-ffi example - basic window"),
         );
 
         // Render the window
-        loop {
-            // Close the window if requested
-            if raylib_ffi::WindowShouldClose() {
-                break;
-            }
-
-            // Begin a draw call
-            raylib_ffi::BeginDrawing();
-
-            // Render text and a background
-            raylib_ffi::ClearBackground(raylib_ffi::Color {
-                r: 255,
-                g: 255,
-                b: 255,
-                a: 255,
+        while !(raylib_ffi::WindowShouldClose()) {
+            raylib_ffi::draw!({
+                // Render text and a background
+                raylib_ffi::ClearBackground(raylib_ffi::colors::WHITE);
+                raylib_ffi::DrawText(
+                    raylib_ffi::rl_str!("Congrats! You created your first window!"),
+                    190,
+                    200,
+                    20,
+                    raylib_ffi::colors::BLACK,
+                );
             });
-            raylib_ffi::DrawText(
-                "Congrats! You created your first window!\0".as_ptr() as *const i8,
-                190,
-                200,
-                20,
-                raylib_ffi::Color {
-                    r: 0,
-                    g: 0,
-                    b: 0,
-                    a: 255,
-                },
-            );
-
-            // End the draw call
-            raylib_ffi::EndDrawing();
         }
 
         // Clean up

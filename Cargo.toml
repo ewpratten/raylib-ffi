@@ -1,6 +1,6 @@
 [package]
 name = "raylib-ffi"
-version = "4.5.0"
+version = "4.5.1"
 authors = ["Evan Pratten <ewpratten@gmail.com>"]
 edition = "2021"
 description = "Automatic raw Rust bindings to raylib"
@@ -21,3 +21,9 @@ exclude = [
 [build-dependencies]
 bindgen = "^0.63.0"
 cmake = "^0.1.49"
+
+[features]
+default = ["enums", "macros", "colors"]
+enums = []
+macros = []
+colors = []

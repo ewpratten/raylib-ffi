@@ -3,4 +3,5 @@
         "${workspaceFolder}/src",
         "${workspaceFolder}/third_party/raylib/src",
     ],
+    "python.formatting.provider": "yapf",
 }
