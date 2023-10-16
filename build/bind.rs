@@ -10,6 +10,10 @@ pub fn compile_raylib(raylib_path: &str) {
         .define("BUILD_EXAMPLES", "OFF")
         .define("CMAKE_BUILD_TYPE", "Release");
 
+    if cfg!(feature = "dylib") {
+        cmake_config.define("BUILD_SHARED_LIBS", "ON");
+    }
+
     // Set the correct build profile
     #[cfg(debug_assertions)]
     {
