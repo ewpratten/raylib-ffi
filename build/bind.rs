@@ -68,7 +68,12 @@ pub fn link_libs() {
     }
 
     // Link raylib itself
-    println!("cargo:rustc-link-lib=static=raylib");
+    if cfg!(feature = "dylib") {
+        println!("cargo:rustc-link-lib=dylib=raylib");
+    }
+    else {
+        println!("cargo:rustc-link-lib=static=raylib");
+    }
 }
 
 /// Generates `bindings.rs` file
