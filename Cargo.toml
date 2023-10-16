@@ -28,3 +28,4 @@ regex = "1"
 [features]
 default = ["macros"]
 macros = []
+dylib = []
