@@ -95,7 +95,7 @@ pub fn main() {
         let cube = LoadModelFromMesh(GenMeshCube(2.0, 4.0, 2.0));
         
         // Load basic lighting shader
-        let shader = LoadShader(rl_str!("examples/lighting.vs"), rl_str!("examples/lighting.fs"));
+        let shader = LoadShader(rl_str!("examples/shaders/lighting.vs"), rl_str!("examples/shaders/lighting.fs"));
 
         // Get some required shader locations
         let view_loc = shader.locs.offset(enums::ShaderLocationIndex::VectorView as isize) as *mut c_int;
