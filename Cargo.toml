@@ -1,6 +1,6 @@
 [package]
 name = "raylib-ffi"
-version = "5.0.0"
+version = "5.0.1"
 authors = ["Evan Pratten <ewpratten@gmail.com>"]
 edition = "2021"
 description = "Automatic raw Rust bindings to raylib"
@@ -17,6 +17,10 @@ exclude = [
     "third_party/raylib/projects/*"
 ]
 build = "build/main.rs"
+
+[dependencies]
+num-traits = "0.2.17"
+num-derive = "0.4.1"
 
 [build-dependencies]
 bindgen = "0.69.1"

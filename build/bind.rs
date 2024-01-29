@@ -85,7 +85,7 @@ pub fn generate_bindings(header_file: &str) {
     // Construct a builder for generating bindings
     let mut builder = bindgen::Builder::default()
         .header(header_file)
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .blocklist_item("DEG2RAD")
         .blocklist_item("PI")
         .blocklist_item("RAD2DEG")

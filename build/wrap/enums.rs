@@ -63,7 +63,7 @@ pub fn wrap_exposed_enums(api_defs: RayLibApiDefinition) {
 
         // Write the enum declaration
         lines.push("#[repr(C)]".to_string());
-        lines.push("#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]".to_string());
+        lines.push("#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, num_derive::FromPrimitive, num_derive::ToPrimitive)]".to_string());
         lines.push(format!("pub enum {} {{", en.name));
 
         // Write each enum variant
@@ -94,13 +94,6 @@ pub fn wrap_exposed_enums(api_defs: RayLibApiDefinition) {
 
         // Close the enum declaration
         lines.push("}".to_string());
-
-        // Write a conversion function
-        lines.push(format!("impl Into<usize> for {} {{", en.name));
-        lines.push(format!("\tfn into(self) -> usize {{"));
-        lines.push(format!("\t\tself as usize"));
-        lines.push(format!("\t}}"));
-        lines.push(format!("}}"));
     }
 
     // Write the output file
