@@ -1,20 +1,23 @@
 [package]
-name = "raylib-ffi"
+name = "raylib"
 version = "5.5.0"
-authors = ["Evan Pratten <ewpratten@gmail.com>"]
+authors = [
+    "Evan Pratten <ewpratten@gmail.com>",
+    "Montegappα Cacilhας <montegasppa@cacilhas.info>",
+]
 edition = "2021"
-description = "Automatic raw Rust bindings to raylib"
+description = "Bindings to Raylib."
 documentation = "https://docs.rs/raylib-ffi"
 readme = "README.md"
-homepage = "https://github.com/ewpratten/raylib-ffi"
-repository = "https://github.com/ewpratten/raylib-ffi"
+homepage = "https://github.com/cacilhas/raylib-rs"
+repository = "https://github.com/cacilhas/raylib-rs"
 license = "GPL-3.0"
 keywords = ["raylib", "graphics"]
-categories = ["external-ffi-bindings", "graphics", "multimedia", "rendering"]
+categories = ["game-engine", "graphics", "multimedia", "rendering"]
 exclude = [
     "third_party/raylib/examples/*",
     "third_party/raylib/logo/*",
-    "third_party/raylib/projects/*"
+    "third_party/raylib/projects/*",
 ]
 build = "build/main.rs"
 
