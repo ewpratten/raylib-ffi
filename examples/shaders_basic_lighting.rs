@@ -1,5 +1,6 @@
 use raylib_ffi::*;
 use ::std::os::raw::*;
+use std::ffi::CString;
 
 const MAX_LIGHTS: usize = 4;    // Max dynamic lights supported by shader
 
@@ -30,11 +31,11 @@ fn create_light(id: isize, kind: i32, position: Vector3, target : Vector3, color
             color,
 
             // NOTE: Lighting shader naming must be the provided ones
-            enabled_loc: GetShaderLocation(shader, rl_str!(format!("lights[{}].enabled", id))),
-            kind_loc: GetShaderLocation(shader, rl_str!(format!("lights[{}].type", id))),
-            position_loc: GetShaderLocation(shader, rl_str!(format!("lights[{}].position", id))),
-            target_loc: GetShaderLocation(shader, rl_str!(format!("lights[{}].target", id))),
-            color_loc: GetShaderLocation(shader, rl_str!(format!("lights[{}].color", id)))
+            enabled_loc: GetShaderLocation(shader, CString::new(format!("lights[{}].enabled", id)).unwrap().as_ptr()),
+            kind_loc: GetShaderLocation(shader, CString::new(format!("lights[{}].type", id)).unwrap().as_ptr()),
+            position_loc: GetShaderLocation(shader, CString::new(format!("lights[{}].position", id)).unwrap().as_ptr()),
+            target_loc: GetShaderLocation(shader, CString::new(format!("lights[{}].target", id)).unwrap().as_ptr()),
+            color_loc: GetShaderLocation(shader, CString::new(format!("lights[{}].color", id)).unwrap().as_ptr())
         };
 
         update_light_values(shader, &light);
@@ -79,7 +80,7 @@ pub fn main() {
         // Initialization
         //--------------------------------------------------------------------------------------
         SetConfigFlags(enums::ConfigFlags::Msaa4xHint as u32);  // Enable Multi Sampling Anti Aliasing 4x (if available)
-        InitWindow(800, 450, rl_str!("raylib [shaders] example - basic lighting"));
+        InitWindow(800, 450, CString::new("raylib [shaders] example - basic lighting").unwrap().as_ptr());
 
         // Define the camera to look into our 3d world
         let mut camera = Camera{
@@ -95,14 +96,14 @@ pub fn main() {
         let cube = LoadModelFromMesh(GenMeshCube(2.0, 4.0, 2.0));
         
         // Load basic lighting shader
-        let shader = LoadShader(rl_str!("examples/shaders/lighting.vs"), rl_str!("examples/shaders/lighting.fs"));
+        let shader = LoadShader(CString::new("examples/shaders/lighting.vs").unwrap().as_ptr(), CString::new("examples/shaders/lighting.fs").unwrap().as_ptr());
 
         // Get some required shader locations
         let view_loc = shader.locs.offset(enums::ShaderLocationIndex::VectorView as isize) as *mut c_int;
-        *view_loc = GetShaderLocation(shader, rl_str!("viewPos"));
+        *view_loc = GetShaderLocation(shader, CString::new("viewPos").unwrap().as_ptr());
 
         // Ambient light level (some basic lighting)
-        let ambient_loc = GetShaderLocation(shader, rl_str!("ambient"));
+        let ambient_loc = GetShaderLocation(shader, CString::new("ambient").unwrap().as_ptr());
         let ambient_value = [0.1 as f32, 0.1 as f32, 0.1 as f32, 1.0 as f32].as_ptr();
         SetShaderValue(shader, ambient_loc, ambient_value as *const c_void, enums::ShaderUniformDataType::Ivec4 as i32);
 
@@ -170,7 +171,7 @@ pub fn main() {
 
                 DrawFPS(10, 10);
 
-                DrawText(rl_str!("Use keys [Y][R][G][B] to toggle lights"), 10, 40, 20, colors::DARKGRAY);
+                DrawText(CString::new("Use keys [Y][R][G][B] to toggle lights").unwrap().as_ptr(), 10, 40, 20, colors::DARKGRAY);
 
             EndDrawing();
             //----------------------------------------------------------------------------------
