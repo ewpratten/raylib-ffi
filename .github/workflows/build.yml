@@ -23,11 +23,25 @@ jobs:
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev cmake llvm-dev libclang-dev clang -y
 
-      - uses: actions-rs/toolchain@v1
+      - name: Configure toolchain
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
 
-      - uses: actions-rs/cargo@v1
+      - name: Build library
+        uses: actions-rs/cargo@v1
         with:
           command: build
           args: --release
+
+      - name: Test library
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --release
+
+      - name: Build examples
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --examples --release
