@@ -1,9 +1,10 @@
 use raylib_ffi::*;
+use std::ffi::CString;
 
 pub fn main() {
     unsafe {
         // Create a window
-        InitWindow(800, 450, rl_str!("raylib-ffi example - basic window"));
+        InitWindow(800, 450, CString::new("raylib-ffi example - basic window").unwrap().as_ptr());
 
         // Define the camera to look into our 3d world (position, target, up vector)
         let mut camera = Camera{
@@ -48,12 +49,12 @@ pub fn main() {
                 DrawRectangle( 10, 10, 320, 133, Fade(colors::SKYBLUE, 0.5));
                 DrawRectangleLines( 10, 10, 320, 133, colors::BLUE);
     
-                DrawText(rl_str!("Free camera default controls:"), 20, 20, 10, colors::BLACK);
-                DrawText(rl_str!("- Mouse Wheel to Zoom in-out"), 40, 40, 10, colors::DARKGRAY);
-                DrawText(rl_str!("- Mouse Wheel Pressed to Pan"), 40, 60, 10, colors::DARKGRAY);
-                DrawText(rl_str!("- Alt + Mouse Wheel Pressed to Rotate"), 40, 80, 10, colors::DARKGRAY);
-                DrawText(rl_str!("- Alt + Ctrl + Mouse Wheel Pressed for Smooth Zoom"), 40, 100, 10, colors::DARKGRAY);
-                DrawText(rl_str!("- Z to zoom to (0, 0, 0)"), 40, 120, 10, colors::DARKGRAY);
+                DrawText(CString::new("Free camera default controls:").unwrap().as_ptr(), 20, 20, 10, colors::BLACK);
+                DrawText(CString::new("- Mouse Wheel to Zoom in-out").unwrap().as_ptr(), 40, 40, 10, colors::DARKGRAY);
+                DrawText(CString::new("- Mouse Wheel Pressed to Pan").unwrap().as_ptr(), 40, 60, 10, colors::DARKGRAY);
+                DrawText(CString::new("- Alt + Mouse Wheel Pressed to Rotate").unwrap().as_ptr(), 40, 80, 10, colors::DARKGRAY);
+                DrawText(CString::new("- Alt + Ctrl + Mouse Wheel Pressed for Smooth Zoom").unwrap().as_ptr(), 40, 100, 10, colors::DARKGRAY);
+                DrawText(CString::new("- Z to zoom to (0, 0, 0)").unwrap().as_ptr(), 40, 120, 10, colors::DARKGRAY);
 
             EndDrawing();
             //----------------------------------------------------------------------------------
